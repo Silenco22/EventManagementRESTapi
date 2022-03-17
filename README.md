@@ -17,6 +17,15 @@ Event management rest api
 ## ENDPOINTS:
 
 <table class="tg">
+ <thead>
+  <tr>
+    <td class="tg-0pky"></th>
+    <td class="tg-0pky"></th>
+    <td class="tg-0pky"></th>
+    <td class="tg-0pky">Examples of what to send in request</th>
+    <td class="tg-0pky"></th>
+  </tr>
+</thead>
 <thead>
   <tr>
     <td class="tg-0pky">GET</th>
