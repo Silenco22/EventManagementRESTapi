@@ -22,7 +22,7 @@ Event management rest api
     <th class="tg-0pky">GET</th>
     <th class="tg-0pky">api/users</th>
     <th class="tg-0pky">Get all users</th>
-    <th class="tg-0pky"></th>
+    <th class="tg-0pky">What to send in request examples</th>
     <th class="tg-0pky"></th>
   </tr>
 </thead>
