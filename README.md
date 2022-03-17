@@ -68,7 +68,7 @@ Event management rest api
     <td class="tg-0pky">POST</td>
     <td class="tg-0pky">api/event/participant</td>
     <td class="tg-0pky">Add participant to Event</td>
-    <td class="tg-0pky"></td>
+    <td class="tg-0pky">{"user": "&lt;userId&gt;", "event_name":"&lt;eventId&gt;"}</td>
     <td class="tg-0pky"></td>
   </tr>
   <tr>
