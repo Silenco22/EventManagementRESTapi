@@ -19,11 +19,11 @@ Event management rest api
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky">GET</th>
-    <th class="tg-0pky">api/users</th>
-    <th class="tg-0pky">Get all users</th>
-    <th class="tg-0pky"></th>
-    <th class="tg-0pky"></th>
+    <td class="tg-0pky">GET</th>
+    <td class="tg-0pky">api/users</th>
+    <td class="tg-0pky">Get all users</th>
+    <td class="tg-0pky"></th>
+    <td class="tg-0pky"></th>
   </tr>
 </thead>
 <tbody>
@@ -155,7 +155,7 @@ Event management rest api
   </tr>
   <tr>
     <td class="tg-0pky">GET</td>
-    <td class="tg-0pky">api/invitations/user/{userID}</td>
+    <td class="tg-0pky">api/invitations/user/{userId}</td>
     <td class="tg-0pky">Get invitations by user id</td>
     <td class="tg-0pky"></td>
     <td class="tg-0pky"></td>
