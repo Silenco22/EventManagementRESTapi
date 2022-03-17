@@ -4,15 +4,15 @@ Event management rest api
 ## HOW TO INSTALL AND START THE SERVER:
 
 #### 0. install pyhton
-#### 1. clone repository: git clone https://github.com/Silenco22/EventManagementRESTapi
-#### 2. create virtual env with: pip install venv venv
-#### 3. navigate to venv folder and activate venv(commands): a) cd venv/Scripts b) activate
-#### 4. install requirements: pip install -r requirements.txt
-#### 5. make migrations: py manage.py makemigrations
-#### 6. migrate: py manage.py migrate
-#### 7. runserver: py manage.py runserver
+#### 1. clone repository| ``` git clone https://github.com/Silenco22/EventManagementRESTapi ```
+#### 2. create virtual env with| ``` pip install venv venv ```
+#### 3. navigate to venv folder and activate venv(commands)| a) ``` cd venv/Scripts ``` b) ``` activate ```
+#### 4. install requirements| ``` pip install -r requirements.txt ```
+#### 5. make migrations| ``` py manage.py makemigrations ```
+#### 6. migrate| ``` py manage.py migrate ```
+#### 7. runserver|``` py manage.py runserver ```
 
-### Command to run tests: py manage.py test
+### Command to run tests| ``` py manage.py test ```
 
 ## ENDPOINTS:
 
