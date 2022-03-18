@@ -20,12 +20,16 @@ from event.models import Event, Meeting, Invitation,EventParticipant
 
 from api.utils import autoCreateInvtitaions
 
+"""
+All user authentication is disabled/commented.
+"""
+
 
 
 #Get all users 
 @api_view(['GET'])
 def getUsers(request):
-	users = Account.objects.all()
+	users = Account.objects.all() #query all users from database 
 	serializer = UserSerializer(users, many=True)
 	return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -40,7 +44,7 @@ def createUser(request):
 		data['response'] = 'successfully registered new user.'
 		data['username'] = account.username
 		data['pk'] = account.pk
-		token = Token.objects.get(user=account).key #token for authentication
+		token = Token.objects.get(user=account).key #creating token for authentication
 		data['token'] = token
 		return Response(data=data, status=status.HTTP_201_CREATED)
 	else:
@@ -53,10 +57,10 @@ def createUser(request):
 def createEvent(request):
 	#Creating event
 	data = {}
-	serializer = CreateEventSerializer(data=request.data)
+	serializer = CreateEventSerializer(data=request.data) #serializing data
 	
-	if serializer.is_valid():
-		serializer.save()
+	if serializer.is_valid(): # validating serilaizer
+		serializer.save() # saving serializer 
 		data['response'] = 'successfully created event'
 	else:
 		data = serializer.errors
@@ -107,8 +111,8 @@ def getParticipants(request, pk): #pk = id eventa
 @api_view(['POST'])
 # @permission_classes((IsAuthenticated,))
 def createMeeting(request):
-	event_participants =EventParticipant.objects.filter(event_name=request.data['event_name'])
-	meetings_with_same_date = Meeting.objects.filter(meeting_date = request.data['meeting_date'])
+	event_participants =EventParticipant.objects.filter(event_name=request.data['event_name']) #query all event participants
+	meetings_with_same_date = Meeting.objects.filter(meeting_date = request.data['meeting_date']) #query all objects with the same date created
 	user = int(request.data['user'])
 	data = {}
 	data['response'] = 'meeting with the same date exist or user is not in the event'
@@ -116,6 +120,7 @@ def createMeeting(request):
 		array = request.data['array'] 
 	except:
 		array = None
+	# if no meeting with the same date and meeting creator is in the event, create meeting:
 	if not meetings_with_same_date:
 		for participant in event_participants:
 			if participant.user.id == user:
@@ -137,16 +142,15 @@ def createMeeting(request):
 					data = serializer.errors
 					return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
 
-				#if optional filed: "array" with ids of users to invite to meeting this will auto create invitations
+				#optional filed: "array", with ids of users to invite to meeting, autoCreateInvitaions() will auto create invitations
 				#to do: dont allow auto creation of invitations for users who are not in the event
 				if array:
 					http_status = ''
-					data, http_status = autoCreateInvtitaions(request.data)
+					data, http_status = autoCreateInvtitaions(request.data) # auto creating invitations for user id in "array"
 					return Response(data=data, status=http_status)
 				return Response(data=data, status=status.HTTP_200_OK)
 
 	return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['PUT','DELETE'])
 # @permission_classes((IsAuthenticated,))
@@ -156,9 +160,7 @@ def statusMeeting(request, pk):
 		#only user whos invitation this is can update status
 	# 	return Response(data="Not allowed", status=status.HTTP_403_FORBIDDEN)
 	if request.method == 'DELETE':
-		# print(meeting)
-		# invitations = Invitation.objects.filter(meeting_name=meeting)
-		# print(invitations)
+    		
 		meeting.delete()
 		return Response(data="deleted", status=status.HTTP_200_OK)
 
@@ -170,7 +172,6 @@ def statusMeeting(request, pk):
 		else:
 			return Response(data=serializer.erros, status=status.HTTP_400_BAD_REQUEST)
 		
-
 #Create invitation (event id,meeting id, invitee > participant of the event id)
 @api_view(['POST'])
 def createInvitation(request):
@@ -217,10 +218,8 @@ def StatusInvitation(request, pk):
 	# if request.user != invitation.invite_name.id:
 	# 		#only user whos invitation this is can update status
 	# 	return Response(data="Not allowed", status=status.HTTP_403_FORBIDDEN)
-	# print(invitation.invite_name)
-	# print(request.user)
 	if request.method == 'PUT':
-    		
+    	#updating status of the invitation	
 		serializer = StatusInvitationSerializer(invitation, data=request.data)
 		if serializer.is_valid():
 			serializer.save()
@@ -229,22 +228,10 @@ def StatusInvitation(request, pk):
 		else:
 			data = serializer.errors
 			return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
-	#delete method
+	#delete method, deleting invitation
 	if request.method == 'DELETE':
 		invitation.delete()
 		return Response(data="deleted", status=status.HTTP_200_OK)
-
-
-
-# #Delete invitaiton
-# @api_view(['DELETE'])
-# # @permission_classes((IsAuthenticated,))
-# def delIvnitation(request, pk): #pk = invitation id
-# 	print(pk)
-# 	invitation = Invitation.objects.get(id=pk)
-# 	if request.user != invitation.invite_name.id: #only user whos invitation this is can delete it
-# 		return Response(data="Not allowed", status=status.HTTP_403_FORBIDDEN)
-	
 
 #get all meetings
 @api_view(['GET'])
@@ -261,8 +248,6 @@ def getMeetings(request, pk): #pk = id user
 
 	serializer = CreateMeetingSerializer(meeting, many=True)
 	return Response(data=serializer.data, status=status.HTTP_200_OK)
-
-
 
 #Schedule meeting(send meeting id, and it will schedule meting with accepted invitations)
 @api_view(['POST'])
@@ -288,6 +273,13 @@ def scheduleMeeting(request):
 
 
 
-
+# #Delete invitaiton
+# @api_view(['DELETE'])
+# # @permission_classes((IsAuthenticated,))
+# def delIvnitation(request, pk): #pk = invitation id
+# 	print(pk)
+# 	invitation = Invitation.objects.get(id=pk)
+# 	if request.user != invitation.invite_name.id: #only user whos invitation this is can delete it
+# 		return Response(data="Not allowed", status=status.HTTP_403_FORBIDDEN)
 
 
