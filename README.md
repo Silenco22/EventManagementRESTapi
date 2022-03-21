@@ -14,6 +14,8 @@ Event management rest api
 
 ### Command to run tests| ``` py manage.py test ```
 
+## DATABASE schema: https://drawsql.app/silenco/diagrams/myapp
+
 ## ENDPOINTS:
 
 <table class="tg">
@@ -171,3 +173,7 @@ Event management rest api
   </tr>
 </tbody>
 </table>
+
+
+
+
