@@ -7,16 +7,16 @@ from rest_framework import status
 def autoCreateInvtitaions(data):
     meeting = Meeting.objects.get(meeting_name=data['meeting_name'])
     meeting_id = meeting.id
-    event_name = data['event_name']
+    event = data['event']
     users = data['array']
     users = list(users.split(" "))
     ser_data = {}
     http_status = ''
     for user in users:
         #to do: check if user is in the right event and if not do something
-        serializer = CreateInvitationSerializer(data={'meeting_name': meeting_id, 
-                                                        'invite_name': user,
-                                                        'event_name':event_name
+        serializer = CreateInvitationSerializer(data={'meeting': meeting_id, 
+                                                        'invitee': user,
+                                                        'event':event
                                                         })
         if serializer.is_valid():
             serializer.save()

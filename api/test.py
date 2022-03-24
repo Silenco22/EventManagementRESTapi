@@ -5,13 +5,7 @@ from django.urls import reverse
 from api.views import createUser
 from account.models import Account
 from event.models import Meeting
-# class TestCase(SimpleTestCase):
-#   def test_myview(self):
-#     c = Client()
-#     response = c.get(reverse('my_view'))
 
-
-# 'email', 'username', 'password', 'password2'
 
 class UserCreationTesting(TestCase):
     def test_createUser(self):
@@ -29,7 +23,7 @@ class MeetingCreationTesting(TestCase):
         payload1 = {"email": "j@j.com", "username": "jay","password": 'dado1234',"password2":'dado1234'}
         payload2 = {"creator": "1", "event_name": "Event"}
         payload3 = {"user": "1", "event_name": "Event"}
-        payload4 = {"user": "1", "meeting_name": "Meeting1","event_name": '1',"meeting_date":'2022-03-17',"array":'1'}
+        payload4 = {"user": "1", "meeting_name": "Meeting1","event_name": '1',"meeting_date":'2022-03-17',"string":'1'}
 
         Header = {'HTTP_AUTHORIZATION': 'auth_token'}
         

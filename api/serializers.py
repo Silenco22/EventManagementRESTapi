@@ -46,20 +46,20 @@ class EventParticipantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EventParticipant
-        fields = ['user','event_name']
+        fields = ['user','event']
 
 class CreateMeetingSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Meeting
-        fields = ['pk','user','event_name', 'meeting_name','meeting_date']
+        fields = ['pk','creator','event', 'meeting_name','meeting_date']
 
 
 class CreateInvitationSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Invitation
-        fields = ['event_name','meeting_name', 'invite_name']
+        fields = ['event','meeting', 'invitee']
 
 class StatusInvitationSerializer(serializers.ModelSerializer):
     
@@ -71,10 +71,10 @@ class InvitationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Invitation
-        fields = ['id','event_name','meeting_name','invite_name','status']
+        fields = ['id','event','meeting','invitee','status']
 
 class ScheduleMeetSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = MeetingScheduled
-        fields = ['attendee', 'meeting_name']
+        fields = ['attendee', 'meeting']
